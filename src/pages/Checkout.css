@@ -1,0 +1,190 @@
+/* Keep your existing .checkout-wrapper and .checkout-container */
+
+.checkout-wrapper {
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    color: white;
+    padding-top: 100px;
+    background: radial-gradient(circle at top right, rgba(57, 255, 20, 0.05), transparent), #0a0a0a;
+}
+
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.checkout-glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 550px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+/* --- Added: Address Form Styling --- */
+.address-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.address-form input, .address-form textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    font-family: inherit;
+    outline: none;
+    transition: 0.3s;
+}
+
+.address-form input:focus {
+    border-color: #39FF14;
+    background: rgba(57, 255, 20, 0.03);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+}
+
+.checkout-heading {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+.highlight { color: #39FF14; }
+
+/* --- Improved: Order Items Summary Scrollbar --- */
+.order-items-summary {
+    max-height: 220px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+}
+
+.order-items-summary::-webkit-scrollbar {
+    width: 5px;
+}
+
+.order-items-summary::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.summary-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.item-info h4 { margin: 0; font-size: 1rem; }
+.item-info p { margin: 0; color: #888; font-size: 0.85rem; }
+
+.item-price-text { font-weight: 700; color: #fff; }
+
+.bill-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 20px 0;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.grand-total {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.neon-price {
+    color: #39FF14;
+    text-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+}
+
+.confirm-order-btn {
+    width: 100%;
+    background: #39FF14;
+    color: black;
+    border: none;
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confirm-order-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(57, 255, 20, 0.4);
+    background: #ffffff;
+}
+
+.confirm-order-btn:disabled {
+    opacity: 0.4;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+/* Spinner remains same */
+.spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(0,0,0,0.1);
+    border-top: 3px solid #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* Mobile View Adjustments */
+@media (max-width: 480px) {
+    .checkout-glass-card { padding: 25px; }
+    .checkout-heading { font-size: 1.6rem; }
+}
+.address-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.label-text {
+    color: #888;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.address-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    resize: none;
+}
+
+.address-textarea:focus {
+    border-color: #39FF14;
+}

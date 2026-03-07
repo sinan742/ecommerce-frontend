@@ -1,0 +1,290 @@
+/* Container & Background */
+.ao-page-wrapper {
+    background-color: #0f172a; 
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.ao-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Section */
+.ao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.ao-page-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.ao-subtitle {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+/* Search Bar (Dark Styled) */
+.ao-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ao-search-icon {
+    position: absolute;
+    left: 12px;
+    color: #64748b;
+}
+
+.ao-search-input {
+    padding: 0.7rem 1rem 0.7rem 2.5rem;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    width: 320px;
+    background: #1e293b;
+    color: white;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.ao-search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Table Design (Dark Theme) */
+.ao-table-card {
+    background: #1e293b;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    overflow: hidden;
+    border: 1px solid #334155;
+}
+
+.ao-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ao-table th {
+    background: #334155;
+    padding: 1.2rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.ao-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #334155;
+    color: #f8fafc;
+    vertical-align: middle;
+}
+
+.ao-id-tag {
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.ao-price-cell {
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+/* Status Select Styles */
+.ao-status-select {
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s;
+}
+
+.ao-status-pending { background: #451a03; color: #fbbf24; }
+.ao-status-order-placed { background: #172554; color: #60a5fa; }
+.ao-status-packed { background: #4a044e; color: #f0abfc; }
+.ao-status-shipped { background: #0c4a6e; color: #7dd3fc; }
+.ao-status-delivered { background: #064e3b; color: #34d399; }
+.ao-status-cancelled { background: #450a0a; color: #f87171; }
+
+/* Action Buttons */
+.ao-actions {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+}
+
+.ao-btn-view, .ao-btn-delete {
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ao-btn-view:hover { background: #334155; color: #60a5fa; border-color: #60a5fa; }
+.ao-btn-delete:hover { background: #450a0a; color: #f87171; border-color: #f87171; }
+
+/* --- THE PREMIUM MODAL UI --- */
+.ao-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000;
+}
+
+.ao-modal-content {
+    background: #1e293b;
+    width: 95%; 
+    max-width: 650px;
+    max-height: 90vh;
+    border-radius: 24px;
+    display: flex; flex-direction: column;
+    border: 1px solid #334155;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.ao-modal-header {
+    padding: 1.5rem 2rem;
+    background: #334155;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.ao-close-x {
+    background: none; border: none; font-size: 2rem; cursor: pointer; color: #cbd5e1;
+    line-height: 1;
+}
+
+.ao-modal-body {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    color: #f8fafc;
+}
+
+.ao-address-card {
+    background: #0f172a;
+    padding: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    margin-top: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.ao-address-text {
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.ao-item-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #334155;
+}
+
+.ao-item-img {
+    width: 60px; height: 60px;
+    object-fit: cover; border-radius: 10px;
+    border: 1px solid #334155;
+}
+
+.ao-item-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* --- THE IMPROVED PRICE SECTION (Footer) --- */
+.ao-summary-footer {
+    padding: 25px 30px;
+    background: #162031; 
+    border-top: 1px solid #334155;
+}
+
+.ao-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ao-total-label {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.ao-grand-total {
+    font-size: 2rem; 
+    font-weight: 800;
+    color: #3b82f6; 
+    letter-spacing: -1px;
+}
+
+.ao-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ao-pay-badge {
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ao-paid { 
+    background: rgba(52, 211, 153, 0.1); 
+    color: #34d399; 
+    border: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.ao-unpaid { 
+    background: rgba(248, 113, 113, 0.1); 
+    color: #f87171; 
+    border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+.ao-btn-close {
+    padding: 10px 25px;
+    background: #334155;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.ao-btn-close:hover {
+    background: #475569;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .ao-hide-mobile { display: none; }
+    .ao-search-input { width: 100%; }
+    .ao-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    .ao-grand-total { font-size: 1.5rem; }
+}

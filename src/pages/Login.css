@@ -1,0 +1,124 @@
+.login-page-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+              url('https://images.pexels.com/photos/114288/pexels-photo-114288.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
+  padding: 20px;
+}
+
+/* Glass Card */
+.login-glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 50px 40px;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.login-header h2 {
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.highlight { color: #39FF14; }
+
+.login-header p {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+}
+
+/* Form Styles */
+.login-form {
+  text-align: left;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  color: #ccc;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-group input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #39FF14;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+}
+
+.input-error {
+  border-color: #ff4d4d !important;
+}
+
+.err-text {
+  color: #ff4d4d;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Buttons */
+.login-submit-btn {
+  width: 100%;
+  background: #39FF14;
+  color: black;
+  border: none;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.login-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(57, 255, 20, 0.4);
+}
+
+.login-footer {
+  margin-top: 30px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.register-link {
+  background: transparent;
+  border: none;
+  color: #39FF14;
+  font-weight: 700;
+  margin-left: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.register-link:hover {
+  color: #fff;
+}

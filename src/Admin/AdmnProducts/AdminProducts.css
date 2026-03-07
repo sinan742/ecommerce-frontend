@@ -1,0 +1,326 @@
+/* --- Root Layout --- */
+.ap-page-container {
+    background-color: #0f172a; /* Deep Dark Blue */
+    min-height: 100vh;
+    padding-top: 80px;
+    font-family: 'Inter', sans-serif;
+}
+
+.ap-main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- Header Section --- */
+.ap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.ap-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+}
+
+.ap-controls {
+    display: flex;
+    gap: 1.2rem;
+}
+
+/* --- Search Box (Dark) --- */
+.ap-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ap-search-icon {
+    position: absolute;
+    left: 14px;
+    color: #64748b;
+}
+
+.ap-search-input {
+    padding: 0.7rem 1rem 0.7rem 2.8rem;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    width: 280px;
+    background: #1e293b;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.ap-search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    width: 320px;
+}
+
+/* --- Add Button --- */
+.ap-btn-add {
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.ap-btn-add:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* --- Table Styles (Dark Theme) --- */
+.ap-table-wrapper {
+    background: #1e293b;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: 1px solid #334155;
+}
+
+.ap-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ap-table th {
+    background: #334155;
+    padding: 1.2rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.ap-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid #334155;
+    color: #f1f5f9;
+    vertical-align: middle;
+}
+
+.ap-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ap-product-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #0f172a;
+    border: 1px solid #475569;
+}
+
+.ap-product-name {
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.ap-brand-tag {
+    background: #334155;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+.ap-price-text {
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+/* --- Badges --- */
+.ap-stock-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.ap-stock-badge.ap-low { background: #450a0a; color: #f87171; }
+.ap-stock-badge.ap-ok { background: #064e3b; color: #34d399; }
+
+/* --- Action Buttons --- */
+.ap-action-btns {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: flex-end;
+}
+
+.ap-edit-icon, .ap-delete-icon {
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ap-edit-icon:hover { color: #3b82f6; border-color: #3b82f6; background: #334155; }
+.ap-delete-icon:hover { color: #ef4444; border-color: #ef4444; background: #450a0a; }
+
+/* --- Modal Styles (Dark Glass) --- */
+/* --- THE PERFECT UPDATE WINDOW (Modal) --- */
+/* --- THE PERFECT VERTICAL UPDATE WINDOW (Modal) --- */
+/* --- THE COMPACT VERTICAL UPDATE WINDOW --- */
+/* --- THE SPACIOUS VERTICAL MODAL --- */
+.ap-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000;
+}
+
+.ap-modal-content {
+    background: #1e293b;
+    width: 95%;
+    max-width: 580px; /* Width 450-il ninnu 580 aakki: Nalla spacious look kittum */
+    max-height: 90vh; /* Screen height 90% vare edukkum */
+    border-radius: 24px;
+    border: 1px solid #334155;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ap-modal-header {
+    background: #334155;
+    padding: 22px 30px; /* Padding kooti */
+    flex-shrink: 0;
+    border-bottom: 1px solid #475569;
+}
+.ap-close-x {
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* 'X' symbol-inte size */
+    font-weight: 300;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: all 0.2s ease;
+    
+    /* Button nalla balance aayi nilkkan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 5px;
+}
+.ap-modal-title {
+    color: #f8fafc;
+    font-size: 1.5rem; /* Title size kooti */
+    font-weight: 800;
+}
+
+/* Scrollable Form Body */
+.ap-modal-form {
+    padding: 30px 40px; /* Side padding kootiyath kond nalla alignment kittum */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Gap kooti, inputs thammil nalla space undakum */
+    overflow-y: auto; 
+    background: #1e293b;
+}
+
+/* Custom Scrollbar */
+.ap-modal-form::-webkit-scrollbar {
+    width: 8px;
+}
+.ap-modal-form::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+.ap-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ap-label {
+    font-size: 0.95rem; /* Label size kooti */
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.ap-input, .ap-textarea {
+    width: 100%;
+    padding: 14px 18px; /* Input height kooti */
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    color: #f1f5f9;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.ap-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.ap-textarea {
+    min-height: 100px; /* Height kooti */
+    resize: none;
+}
+
+/* Footer Section */
+.ap-modal-actions {
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 15px;
+    padding: 20px 30px;
+    background: #1e293b;
+    border-top: 1px solid #334155;
+    flex-shrink: 0;
+}
+
+.ap-btn-cancel {
+    background: #334155;
+    color: #cbd5e1;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ap-btn-save {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ap-btn-save:hover {
+    background: #2563eb;
+    transform: scale(1.02);
+}

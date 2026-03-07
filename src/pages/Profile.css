@@ -1,0 +1,125 @@
+.profile-wrapper {
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  color: white;
+  padding-top: 100px;
+}
+
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Header Section */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  background: #39FF14;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 900;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+.profile-welcome h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.profile-welcome p {
+  color: #888;
+  margin-top: 5px;
+}
+
+.highlight { color: #39FF14; }
+
+/* Dashboard Grid */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.dash-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dash-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #39FF14;
+  transform: translateY(-8px);
+}
+
+.dash-icon {
+  font-size: 2.5rem;
+  color: #39FF14;
+  margin-bottom: 15px;
+}
+
+.dash-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+}
+
+.dash-card p {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Logout Card Specifics */
+.logout-card:hover {
+  border-color: #ff4d4d;
+}
+
+.logout-card:hover .dash-icon {
+  color: #ff4d4d;
+}
+
+/* Not Logged In State */
+.not-logged-in {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.login-redirect-btn {
+  background: #39FF14;
+  color: black;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 12px;
+  font-weight: 800;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-redirect-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+}
+
+@media (max-width: 600px) {
+  .profile-header { flex-direction: column; text-align: center; }
+}

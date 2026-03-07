@@ -1,0 +1,151 @@
+.products-page {
+  background-color: #0a0a0a;
+  color: white;
+  padding: 120px 8% 50px; /* Space for fixed navbar */
+  min-height: 100vh;
+}
+
+.shop-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.highlight { color: #39FF14; }
+
+.controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255,255,255,0.03);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.1);
+  margin-top: 30px;
+}
+
+.search-bar {
+  flex: 1;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+}
+
+.modern-select {
+  background: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: #161616;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  border-color: #39FF14;
+}
+
+.card-top {
+  position: relative;
+  height: 250px;
+  background: #f5f5f5; /* Light contrast for product photos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.wish-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.wish-btn.active { color: #ff4d4d; }
+
+.card-body {
+  padding: 20px;
+}
+
+.brand-tag {
+  color: #39FF14;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.pr-name {
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+.pr-price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.add-cart-btn {
+  flex: 2;
+  background: #39FF14;
+  color: black;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.details-link {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #333;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .controls-bar { flex-direction: column; }
+}

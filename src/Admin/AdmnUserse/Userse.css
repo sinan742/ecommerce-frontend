@@ -1,0 +1,201 @@
+/* Container & Background */
+.usm-admin-page-root {
+    background-color: #0f172a; /* Deep Dark Blue */
+    min-height: 100vh;
+    padding-top: 80px; /* AdNavbar offset */
+    font-family: 'Inter', sans-serif;
+}
+
+.usm-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header Section */
+.usm-header-box {
+    margin-bottom: 2.5rem;
+}
+
+.usm-main-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.usm-sub-text {
+    color: #94a3b8;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+/* Search Bar (Dark Theme) */
+.usm-search-box-wrapper {
+    margin-bottom: 2.5rem;
+}
+
+.usm-search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 450px;
+}
+
+.usm-search-icon-svg {
+    position: absolute;
+    left: 14px;
+    color: #64748b;
+}
+
+.usm-search-input-tag {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    color: #f8fafc;
+    outline: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.usm-search-input-tag:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Grid Layout */
+.usm-users-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+/* User Card Design */
+.usm-user-profile-card {
+    background: #1e293b;
+    border-radius: 16px;
+    border: 1px solid #334155;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.usm-user-profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.usm-card-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* User Initial Avatar */
+.usm-user-initial-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.usm-user-text-info {
+    overflow: hidden;
+}
+
+.usm-user-name-label {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.usm-user-email-label {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 3px;
+    word-break: break-all;
+}
+
+/* Actions Section */
+.usm-card-bottom-actions {
+    padding-top: 1rem;
+    border-top: 1px solid #334155;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usm-action-label {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Dropdown Styling */
+.usm-status-dropdown {
+    padding: 0.5rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.usm-dropdown-Active {
+    background-color: #064e3b;
+    color: #34d399;
+    border-color: #065f46;
+}
+
+.usm-dropdown-Blocked {
+    background-color: #450a0a;
+    color: #f87171;
+    border-color: #7f1d1d;
+}
+
+/* States */
+.usm-loading-state, .usm-error-state, .usm-empty-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f8fafc;
+    text-align: center;
+}
+
+.usm-empty-results {
+    height: 200px;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .usm-page-container {
+        padding: 1rem;
+    }
+    
+    .usm-search-field {
+        max-width: 100%;
+    }
+
+    .usm-users-grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
