@@ -130,11 +130,15 @@ function Products() {
             <div className='product-card' key={product.id}>
               <div className='card-top'>
                 <img 
-  src={product.image} 
-  alt={product.name} 
-  className='product-img' 
-  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} // ഇമേജ് ലോഡ് ആയില്ലെങ്കിൽ ഒരു പകരക്കാരൻ ചിത്രം കാണിക്കാൻ
-/>
+        src={imageUrl} 
+        alt={product?.name || 'Product Image'} 
+        className='product-img' 
+        // ഇമേജ് ലിങ്ക് ഉണ്ടെങ്കിലും ലോഡ് ആയില്ലെങ്കിൽ (404 Error) ഇത് പ്രവർത്തിക്കും
+        onError={(e) => { 
+          e.target.onerror = null; 
+          e.target.src = 'https://via.placeholder.com/300x300?text=Error+Loading'; 
+        }} 
+      />
                 <button 
                   className={`wish-btn ${isFavourite ? 'active' : ''}`} 
                   onClick={() => toggleWishlist(product)}
