@@ -76,11 +76,12 @@ function Details() {
                 <div className='details-grid'>
                     <div className='details-image-section'>
                         <div className='image-bg-glow'></div>
-                        <img 
-                            className='main-detail-img' 
-                            src={product.image.startsWith('http') ? product.image : `http://127.0.0.1:8000${product.image}`} 
-                            alt={product.name} 
-                        />
+                       <img 
+  src={product.image ? product.image : 'https://via.placeholder.com/150'} 
+  alt={product.name} 
+  className='product-img' 
+  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+/>
                     </div>
 
                     <div className='details-info-section'>

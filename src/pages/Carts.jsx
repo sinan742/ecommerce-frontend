@@ -116,10 +116,12 @@ function Carts() {
                                 {cart.map((item) => (
                                     <div key={item.id} className='cart-item-card'>
                                         <div className='cart-item-img'>
-                                            <img 
-                                                src={item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`} 
-                                                alt={item.product.name} 
-                                            />
+                                           <img 
+  src={item.product.name ? product.image : 'https://via.placeholder.com/150'} 
+  alt={item.product.name} 
+  className='product-img' 
+  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+/>
                                         </div>
                                         <div className='cart-item-details'>
                                             <div className='item-header'>
