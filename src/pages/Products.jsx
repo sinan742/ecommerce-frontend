@@ -129,11 +129,12 @@ function Products() {
           return (
             <div className='product-card' key={product.id}>
               <div className='card-top'>
-                <img 
-                  src={product.image.startsWith('http') ? product.image : `${BASE_URL}${product.image}`} 
-                  alt={product.name} 
-                  className='product-img' 
-                />
+               <img 
+  src={product.image ? product.image : 'https://via.placeholder.com/150'} 
+  alt={product.name} 
+  className='product-img' 
+  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+/>
                 <button 
                   className={`wish-btn ${isFavourite ? 'active' : ''}`} 
                   onClick={() => toggleWishlist(product)}
