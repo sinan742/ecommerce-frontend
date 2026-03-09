@@ -74,10 +74,15 @@ function Wishlist() {
                             <div className='wish-card' key={item.id}>
                                 <div className='wish-img-container'>
                                     <img 
-  src={product.image ? product.image : 'https://via.placeholder.com/150'} 
-  alt={product.name} 
-  className='product-img' 
-  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+  src={
+    item.product?.image 
+      ? (item.product.image.startsWith('http') 
+          ? item.product.image 
+          : `${BASE_URL}${item.product.image}`)
+      : 'https://via.placeholder.com/150' 
+  } 
+  alt={item.product?.name || 'Product Image'} 
+  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
 />
                                     <button className='remove-icon' onClick={() => removeWish(item)}>×</button>
                                 </div>
