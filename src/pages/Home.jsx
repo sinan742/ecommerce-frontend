@@ -45,11 +45,10 @@ function Home() {
                 <div className='card-image-wrapper'>
                   {/* Image path handle*/}
                   <img 
-  src={products.image ? products.image : 'https://via.placeholder.com/150'} 
-  alt={products.name} 
-  className='product-img' 
-  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
-/>
+                    src={item.image.startsWith('http') ? item.image : `${BASE_URL}${item.image}`} 
+                    alt={item.name} 
+                    onError={(e) => { e.target.src = 'https://via.placeholder.com/300x300?text=No+Image'; }}
+                  />
                 </div>
                 <div className='card-details'>
                   <h3>{item.name}</h3>
