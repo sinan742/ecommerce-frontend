@@ -45,7 +45,7 @@ function Home() {
                 <div className='card-image-wrapper'>
                   {/* Image path handle*/}
                   <img 
-  src="https://res.cloudinary.com/dnbgw6a7q/image/upload/v1773227882/manunited_p4mazc.png" 
+  src={products.image ? products.image : 'https://via.placeholder.com/150'} 
   alt={products.name} 
   className='product-img' 
   onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
