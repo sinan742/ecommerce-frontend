@@ -171,7 +171,7 @@ export default function AdminProducts() {
                                 <tr key={p.id}>
                                     <td>
                                         <div className="ap-product-cell">
-                                            <img src={p.imgUrl || 'https://placehold.co/50'} className="ap-product-img" alt="" />
+                                            <img src={p.image || 'https://placehold.co/50'} className="ap-product-img" alt="" />
                                             <span className="ap-product-name">{p.name}</span>
                                         </div>
                                     </td>
