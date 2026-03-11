@@ -210,3 +210,29 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+/* ഐക്കൺ ആക്ടീവ് ആകുമ്പോൾ പച്ച നിറം വരാൻ */
+.active-action .nav-icon {
+    color: var(--primary) !important;
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.active-action::after {
+    content: '';
+    position: absolute;
+    bottom: -15px; 
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0 0 12px var(--primary);
+    animation: underlineGrow 0.3s ease-out;
+}
+
+@media (max-width: 900px) {
+    .active-action::after {
+        display: none; 
+    }
+}
