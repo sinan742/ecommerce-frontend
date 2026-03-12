@@ -59,7 +59,6 @@ function Carts() {
         .then(() => {
             fetchCart(currentPage);
             fetchAllItemsForTotal();
-            window.dispatchEvent(new Event("cartUpdated"));
         })
         .catch(err => console.error("Update error:", err));
     };
@@ -71,8 +70,6 @@ function Carts() {
         })
         .then(() => {
             toast.success("Item removed");
-            window.dispatchEvent(new Event("cartUpdated"));
-            window.dispatchEvent(new Event("storage_updated"));
             fetchCart(currentPage);
             fetchAllItemsForTotal();
             if (cart.length === 1 && currentPage > 1) setCurrentPage(currentPage - 1);
@@ -83,91 +80,73 @@ function Carts() {
     const shipping = grandTotal > 0 ? 50.00 : 0;
 
     return (
-        <div className='bn-cart-page'>
-            <div className='bn-cart-container'>
-                <h1 className='bn-cart-title'>Your <span className='bn-text-neon'>Bag</span></h1>
+        <div className='cart-view-container'>
+            <div className='cart-main-content'>
+                <h1 className='cart-header-title'>Shopping <span className='neon-txt'>Cart</span></h1>
                 
                 {!userlog ? (
-                    <div className='bn-auth-notice'>
-                        <h2>Your bag is waiting</h2>
-                        <button className='bn-login-btn' onClick={() => navigate('/login')}>Login Now</button>
+                    <div className='no-auth-box'>
+                        <p>Please login to see your cart.</p>
+                        <button onClick={() => navigate('/login')}>Login Now</button>
                     </div>
                 ) : cart.length === 0 ? (
-                    <div className='bn-empty-state'>
-                        <p>Your cart is empty.</p>
-                        <button className='bn-shop-btn' onClick={() => navigate('/Products')}>Continue Shopping</button>
+                    <div className='empty-cart-box'>
+                        <p>Your bag is empty!</p>
+                        <button onClick={() => navigate('/Products')}>Shop Products</button>
                     </div>
                 ) : (
-                    <div className='bn-cart-grid'>
-                        {/* Left Side: Items List */}
-                        <div className='bn-cart-items-wrapper'>
+                    <div className='cart-layout-grid'>
+                        {/* List Area */}
+                        <div className='cart-items-column'>
                             {cart.map((item) => (
-                                <div key={item.id} className='bn-cart-card'>
-                                    <div className='bn-cart-card-img'>
-                                        <img 
-                                            src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : 'https://via.placeholder.com/150'} 
-                                            alt={item.product?.name} 
-                                            onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
-                                        />
+                                <div key={item.id} className='cart-product-strip'>
+                                    <div className='product-thumb'>
+                                        <img src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : ''} alt="" />
                                     </div>
-                                    <div className='bn-cart-card-info'>
-                                        <div className='bn-info-header'>
+                                    <div className='product-details'>
+                                        <div className='row-between'>
                                             <h3>{item.product?.name}</h3>
-                                            <button className='bn-remove-btn' onClick={() => removeCart(item.id)}>Remove</button>
+                                            <button className='rm-btn' onClick={() => removeCart(item.id)}>Remove</button>
                                         </div>
-                                        <p className='bn-brand-text'>{item.product?.brand || 'Premium'}</p>
-                                        <div className='bn-info-footer'>
-                                            <div className='bn-qty-selector'>
+                                        <div className='row-between mt-10'>
+                                            <div className='qty-tool'>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
                                                 <span>{item.quantity}</span>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                                             </div>
-                                            <div className='bn-item-price'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</div>
+                                            <span className='price-bold'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</span>
                                         </div>
                                     </div>
                                 </div>
                             ))}
-
-                            {/* Pagination Buttons */}
-                            <div className='bn-pagination'>
-                                <button className='bn-page-nav' disabled={!hasPrev} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
-                                <span className='bn-page-indicator'>Page {currentPage}</span>
-                                <button className='bn-page-nav' disabled={!hasNext} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                            
+                            {/* Pagination Controls */}
+                            <div className='pagination-bar'>
+                                <button disabled={!hasPrev} onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
+                                <span>{currentPage}</span>
+                                <button disabled={!hasNext} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
                             </div>
                         </div>
 
-                        {/* Right Side Summary (Desktop Only) */}
-                        <aside className='bn-desktop-sidebar'>
-                            <div className='bn-summary-card'>
-                                <h3>Order Summary</h3>
-                                <div className='bn-summary-row'>
-                                    <span>Subtotal</span>
-                                    <span>₹{grandTotal.toFixed(2)}</span>
-                                </div>
-                                <div className='bn-summary-row'>
-                                    <span>Shipping</span>
-                                    <span>₹{shipping.toFixed(2)}</span>
-                                </div>
-                                <div className='bn-summary-divider'></div>
-                                <div className='bn-summary-row bn-total-line'>
-                                    <span>Total</span>
-                                    <span className='bn-text-neon'>₹{(grandTotal + shipping).toFixed(2)}</span>
-                                </div>
-                                <button className='bn-checkout-main-btn' onClick={() => navigate('/checkout')}>
-                                    Proceed to Checkout
-                                </button>
+                        {/* Desktop Sidebar */}
+                        <aside className='cart-sidebar-desktop'>
+                            <div className='summary-inner-box'>
+                                <h3>Price Details</h3>
+                                <div className='sum-row'><span>Items Subtotal</span><span>₹{grandTotal.toFixed(2)}</span></div>
+                                <div className='sum-row'><span>Delivery Fee</span><span>₹{shipping.toFixed(2)}</span></div>
+                                <hr />
+                                <div className='sum-row grand-total'><span>Total Pay</span><span>₹{(grandTotal + shipping).toFixed(2)}</span></div>
+                                <button className='checkout-cta' onClick={() => navigate('/checkout')}>Checkout Now</button>
                             </div>
                         </aside>
 
-                        {/* Mobile Sticky Footer Bar */}
-                        <div className='bn-mobile-sticky-footer'>
-                            <div className='bn-mobile-price-group'>
-                                <span className='bn-m-label'>Total Amount</span>
-                                <span className='bn-m-price'>₹{(grandTotal + shipping).toFixed(2)}</span>
+                        {/* MOBILE STICKY FOOTER */}
+                        <div className='mobile-checkout-sticky-bar'>
+                            <div className='sticky-price-info'>
+                                <p>Payable Amount</p>
+                                <h2>₹{(grandTotal + shipping).toFixed(2)}</h2>
                             </div>
-                            <button className='bn-mobile-continue-btn' onClick={() => navigate('/checkout')}>
-                                Continue
-                            </button>
+                            <button className='sticky-continue-btn' onClick={() => navigate('/checkout')}>Continue</button>
                         </div>
                     </div>
                 )}
