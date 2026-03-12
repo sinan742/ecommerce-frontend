@@ -50,7 +50,7 @@ function Myorder() {
                             {order.items && order.items.map((item) => (
                                 <div key={item.id} className="fk-item-section">
                                     <div className="fk-img-container">
-                                        <img src={item.image_url || 'https://placehold.co/100'} alt="" />
+                                        <img src={item.image || 'https://placehold.co/100'} alt="" />
                                     </div>
                                     <div className="fk-details-container">
                                         <p className="fk-product-name">{item.product_name}</p>
