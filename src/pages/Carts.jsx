@@ -84,87 +84,88 @@ function Carts() {
 
     return (
         <div className='bn-cart-page'>
-            <div className='bn-cart-wrapper'>
-                <h1 className='bn-cart-main-title'>Your <span className='bn-text-neon'>Bag</span></h1>
+            <div className='bn-cart-container'>
+                <h1 className='bn-cart-title'>Your <span className='bn-text-neon'>Bag</span></h1>
                 
                 {!userlog ? (
-                    <div className='bn-auth-prompt'>
+                    <div className='bn-auth-notice'>
                         <h2>Your bag is waiting</h2>
-                        <button className='bn-login-cta' onClick={() => navigate('/login')}>Login Now</button>
+                        <button className='bn-login-btn' onClick={() => navigate('/login')}>Login Now</button>
                     </div>
                 ) : cart.length === 0 ? (
-                    <div className='bn-empty-cart-state'>
+                    <div className='bn-empty-state'>
                         <p>Your cart is empty.</p>
-                        <button className='bn-shop-now-btn' onClick={() => navigate('/Products')}>Continue Shopping</button>
+                        <button className='bn-shop-btn' onClick={() => navigate('/Products')}>Continue Shopping</button>
                     </div>
                 ) : (
-                    <div className='bn-cart-grid-layout'>
-                        {/* Left Section: Items */}
-                        <div className='bn-cart-list-container'>
+                    <div className='bn-cart-grid'>
+                        {/* Left Side: Items List */}
+                        <div className='bn-cart-items-wrapper'>
                             {cart.map((item) => (
-                                <div key={item.id} className='bn-cart-item-card'>
-                                    <div className='bn-item-image-box'>
+                                <div key={item.id} className='bn-cart-card'>
+                                    <div className='bn-cart-card-img'>
                                         <img 
                                             src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : 'https://via.placeholder.com/150'} 
                                             alt={item.product?.name} 
                                             onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
                                         />
                                     </div>
-                                    <div className='bn-item-details-box'>
-                                        <div className='bn-item-top-row'>
+                                    <div className='bn-cart-card-info'>
+                                        <div className='bn-info-header'>
                                             <h3>{item.product?.name}</h3>
-                                            <button className='bn-remove-item-link' onClick={() => removeCart(item.id)}>Remove</button>
+                                            <button className='bn-remove-btn' onClick={() => removeCart(item.id)}>Remove</button>
                                         </div>
-                                        <p className='bn-item-brand'>{item.product?.brand || 'Premium Quality'}</p>
-                                        <div className='bn-item-bottom-row'>
-                                            <div className='bn-qty-control'>
+                                        <p className='bn-brand-text'>{item.product?.brand || 'Premium'}</p>
+                                        <div className='bn-info-footer'>
+                                            <div className='bn-qty-selector'>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
                                                 <span>{item.quantity}</span>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                                             </div>
-                                            <div className='bn-item-subtotal'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</div>
+                                            <div className='bn-item-price'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
 
-                            <div className='bn-pagination-nav'>
-                                <button disabled={!hasPrev} onClick={() => setCurrentPage(prev => prev - 1)}>Prev</button>
-                                <span className='bn-page-info'>Page {currentPage}</span>
-                                <button disabled={!hasNext} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+                            {/* Pagination Buttons */}
+                            <div className='bn-pagination'>
+                                <button className='bn-page-nav' disabled={!hasPrev} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                                <span className='bn-page-indicator'>Page {currentPage}</span>
+                                <button className='bn-page-nav' disabled={!hasNext} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
                             </div>
                         </div>
 
-                        {/* Right Section: Summary (Desktop) */}
-                        <aside className='bn-summary-sidebar'>
-                            <div className='bn-summary-sticky-card'>
-                                <h3 className='bn-summary-title'>Order Summary</h3>
-                                <div className='bn-summary-data-row'>
+                        {/* Right Side Summary (Desktop Only) */}
+                        <aside className='bn-desktop-sidebar'>
+                            <div className='bn-summary-card'>
+                                <h3>Order Summary</h3>
+                                <div className='bn-summary-row'>
                                     <span>Subtotal</span>
                                     <span>₹{grandTotal.toFixed(2)}</span>
                                 </div>
-                                <div className='bn-summary-data-row'>
+                                <div className='bn-summary-row'>
                                     <span>Shipping</span>
                                     <span>₹{shipping.toFixed(2)}</span>
                                 </div>
                                 <div className='bn-summary-divider'></div>
-                                <div className='bn-summary-data-row bn-total-row'>
+                                <div className='bn-summary-row bn-total-line'>
                                     <span>Total</span>
                                     <span className='bn-text-neon'>₹{(grandTotal + shipping).toFixed(2)}</span>
                                 </div>
-                                <button className='bn-desktop-checkout-btn' onClick={() => navigate('/checkout')}>
+                                <button className='bn-checkout-main-btn' onClick={() => navigate('/checkout')}>
                                     Proceed to Checkout
                                 </button>
                             </div>
                         </aside>
 
-                        {/* Mobile Sticky Bar (Meesho Style) */}
-                        <div className='bn-mobile-bottom-bar'>
-                            <div className='bn-mobile-total-box'>
+                        {/* Mobile Sticky Footer Bar */}
+                        <div className='bn-mobile-sticky-footer'>
+                            <div className='bn-mobile-price-group'>
                                 <span className='bn-m-label'>Total Amount</span>
                                 <span className='bn-m-price'>₹{(grandTotal + shipping).toFixed(2)}</span>
                             </div>
-                            <button className='bn-mobile-checkout-btn' onClick={() => navigate('/checkout')}>
+                            <button className='bn-mobile-continue-btn' onClick={() => navigate('/checkout')}>
                                 Continue
                             </button>
                         </div>
