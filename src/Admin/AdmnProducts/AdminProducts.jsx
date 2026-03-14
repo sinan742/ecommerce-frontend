@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Plus, Edit, Trash2, Search } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, Link as LinkIcon } from 'lucide-react'; 
 import AdNavbar from '../../adminNavbar/AdNavbar';
 import './AdminProducts.css';
 import { toast } from 'react-toastify';
 
 const ProductModal = ({ product, onClose, onSave }) => {
     const [formData, setFormData] = useState(
-        product || { name: '', brand: '', price: '', stock: '', description: '', image: null }
+        product || { name: '', brand: '', price: '', stock: '', description: '', image: '' } 
     );
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === 'image') {
-            setFormData(prev => ({ ...prev, image: files[0] }));
-        } else {
-            setFormData(prev => ({ ...prev, [name]: value }));
-        }
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.brand || !formData.price || !formData.stock) {
-            toast.warning("Fill all required fields.");
+        if (!formData.name || !formData.brand || !formData.price || !formData.stock || !formData.image) {
+            toast.warning("Please fill all fields including Image URL.");
             return;
         }
         onSave(formData);
@@ -58,10 +54,29 @@ const ProductModal = ({ product, onClose, onSave }) => {
                         <label className="ap-label">Description</label>
                         <textarea className="ap-textarea" name="description" value={formData.description} onChange={handleChange}></textarea>
                     </div>
+                    
+                    {/* 🛑 ഇവിടെ മാറ്റം വരുത്തി: File Input മാറ്റി Text Input ആക്കി */}
                     <div className="ap-form-group">
-                        <label className="ap-label">Upload Image</label>
-                        <input className="ap-file-input" type="file" name="image" onChange={handleChange} accept="image/*" />
+                        <label className="ap-label">Product Image URL</label>
+                        <div style={{ position: 'relative' }}>
+                            <input 
+                                className="ap-input" 
+                                type="text" 
+                                name="image" 
+                                value={formData.image} 
+                                onChange={handleChange} 
+                                placeholder="https://res.cloudinary.com/..." 
+                                required 
+                            />
+                        </div>
+                        {formData.image && (
+                            <div className="ap-image-preview-mini">
+                                <p style={{ fontSize: '10px', color: '#666' }}>Preview:</p>
+                                <img src={formData.image} alt="Preview" style={{ width: '50px', borderRadius: '4px' }} onError={(e) => e.target.src='https://placehold.co/50?text=Invalid+URL'} />
+                            </div>
+                        )}
                     </div>
+
                     <div className="ap-modal-actions">
                         <button type="button" onClick={onClose} className="ap-btn-cancel">Cancel</button>
                         <button type="submit" className="ap-btn-save">Save Product</button>
@@ -93,16 +108,14 @@ export default function AdminProducts() {
     useEffect(() => { fetchProducts(); }, []);
 
     const handleSaveProduct = async (productData) => {
-        const data = new FormData();
-        data.append('name', productData.name);
-        data.append('brand', productData.brand);
-        data.append('price', productData.price);
-        data.append('stock', productData.stock);
-        data.append('description', productData.description || "");
-
-        if (productData.image instanceof File) {
-            data.append('image', productData.image);
-        }
+        const data = {
+            name: productData.name,
+            brand: productData.brand,
+            price: productData.price,
+            stock: productData.stock,
+            description: productData.description || "",
+            image: productData.image 
+        };
 
         try {
             if (productData.id) {
@@ -114,7 +127,9 @@ export default function AdminProducts() {
             }
             setIsModalOpen(false);
             fetchProducts();
-        } catch (err) { toast.error("Error saving data."); }
+        } catch (err) { 
+            toast.error("Error saving data. Check if the URL is too long."); 
+        }
     };
 
     const handleDeleteProduct = async (id) => {
