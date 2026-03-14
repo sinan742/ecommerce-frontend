@@ -32,7 +32,7 @@ const OrderDetailsModal = ({ order, onClose }) => {
                             <div key={item.id} className="ao-item-card">
                                 <div className="ao-item-main">
                                     <img 
-                                        src={item.imgUrl || 'https://placehold.co/60?text=Product'} 
+                                        src={item.image || 'https://placehold.co/60?text=Product'} 
                                         alt={item.product_name} 
                                         className="ao-item-img" 
                                     />
