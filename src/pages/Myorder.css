@@ -1,9 +1,10 @@
-/* Background & Wrapper */
+/* --- Background & Wrapper --- */
 .fk-orders-bg {
-    background-color: #0a0a0a; /* Pure Dark */
+    background-color: #000000; /* Pure Black */
     min-height: 100vh;
     padding-top: 100px;
-    font-family: 'Poppins', sans-serif;
+    padding-bottom: 50px;
+    font-family: 'Inter', sans-serif;
 }
 
 .fk-container {
@@ -12,116 +13,102 @@
     padding: 20px;
 }
 
-/* Flipkart Style Card in Dark Theme */
+/* --- Full Screen Loading (Fixes the white background issue) --- */
+.fk-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000; /* Force black background */
+    color: #39FF14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* --- Order Card Styling --- */
 .fk-order-card {
-    background: #121212; /* Slightly lighter black */
-    border: 1px solid #1f1f1f;
-    border-radius: 12px;
+    background: #111111;
+    border: 1px solid #222;
+    border-radius: 16px;
     padding: 25px;
-    margin-bottom: 20px;
-    transition: 0.3s;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
 }
 
 .fk-order-card:hover {
-    border-color: #39FF14; /* Neon green border on hover */
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+    border-color: rgba(57, 255, 20, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Item Section Layout */
+/* --- Item Section --- */
 .fk-item-section {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     align-items: center;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #1f1f1f;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #222;
 }
 
 .fk-img-container img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 8px;
-    background: #1a1a1a;
+    border-radius: 12px;
     border: 1px solid #333;
 }
 
 .fk-details-container {
-    flex: 2;
-    padding: 0 25px;
+    flex: 1;
 }
 
 .fk-product-name {
-    font-size: 1.1rem;
-    color: #ffffff;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 700;
+    margin: 0 0 5px 0;
 }
 
 .fk-sub-text {
-    font-size: 0.9rem;
     color: #888;
+    font-size: 0.9rem;
 }
 
 .fk-price {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #39FF14; /* Neon Green Price */
-    margin-top: 10px;
+    color: #39FF14;
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-top: 8px;
 }
 
-/* Status Section */
-.fk-status-container {
-    flex: 1.2;
-    text-align: right;
-}
-
-.fk-status-main {
-    font-weight: 600;
-    font-size: 1rem;
-    color: #39FF14; /* Status in Green */
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-transform: uppercase;
-}
-
-.fk-green-dot {
-    height: 10px;
-    width: 10px;
-    background: #39FF14;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #39FF14;
-}
-
-.fk-delivery-subtext {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: 5px;
-}
-
-/* Flipkart Timeline Logic in Neon */
+/* --- Timeline Styling --- */
 .fk-timeline {
     position: relative;
-    padding: 30px 0 10px;
-    margin-top: 10px;
+    margin-top: 40px;
+    padding: 0 10px;
 }
 
 .fk-line-bg {
     position: absolute;
-    top: 42px;
-    left: 5%;
-    width: 90%;
-    height: 3px;
+    top: 15px; /* Aligns with circle center */
+    left: 40px;
+    right: 40px;
+    height: 4px;
     background: #222;
     z-index: 1;
-    border-radius: 10px;
 }
 
 .fk-line-active {
     height: 100%;
-    background: #e7e4e2; /* Active Neon Line */
-    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-    transition: width 0.8s ease-in-out;
+    background: linear-gradient(90deg, #39FF14, #00FF88);
+    box-shadow: 0 0 10px #39FF14;
+    transition: width 1s ease-in-out;
 }
 
 .fk-steps {
@@ -132,81 +119,75 @@
 }
 
 .fk-step {
-    text-align: center;
-    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
 }
 
 .fk-circle {
-    width: 24px;
-    height: 24px;
-    background: #0a0a0a;
+    width: 34px;
+    height: 34px;
+    background: #111;
     border: 2px solid #333;
     border-radius: 50%;
-    margin: 0 auto 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 11px;
-    transition: 0.3s;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
 }
 
-/* When Step is Completed */
+/* Completed Step Styling */
 .fk-step.done .fk-circle {
-    border-color: #39FF14;
     background: #39FF14;
-    color: #000; /* Icon color becomes black on green background */
+    border-color: #39FF14;
+    color: #000;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.6);
+}
+
+/* Football Spin Animation for Current Status */
+.fk-step.done:last-of-type .fk-circle,
+.fk-step.active-status .fk-circle {
+    animation: ball-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes ball-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0px #39FF14; }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px #39FF14; }
+    100% { transform: scale(1); box-shadow: 0 0 0px #39FF14; }
 }
 
 .fk-step span {
     font-size: 0.75rem;
-    color: #555;
-    font-weight: 500;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .fk-step.done span {
     color: #fff;
-    font-weight: 600;
 }
 
-/* Empty State */
-.fk-empty {
-    color: #adaaaa;
-    text-align: center;
-    padding: 100px;
-    font-size: 1.2rem;
-}
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .fk-item-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .fk-status-container {
+        text-align: center;
+        margin-top: 10px;
+    }
 
-/* Custom Loader */
-.fk-loading {
-    color: #39FF14;
-    text-align: center;
-    padding-top: 150px;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    background-color: #000;
-}
-.fk-step.done .fk-circle {
-    border-color: #0a0a0a;
-    background: #39FF14;
-    color: #000;
-    font-size: 16px;
-    animation: ball-spin 2s linear infinite; 
-}
-
-@keyframes ball-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.fk-circle {
-    width: 30px; 
-    height: 30px;
-    background: #0a0a0a;
-    border: 2px solid #333;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
+    .fk-step span {
+        font-size: 0.6rem;
+    }
+    
+    .fk-line-bg {
+        left: 20px;
+        right: 20px;
+    }
 }
