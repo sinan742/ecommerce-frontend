@@ -1,13 +1,13 @@
-/* Custom Global Variables */
+/* --- Global Variables --- */
 :root {
-  --primary: #39FF14;
-  --glass: rgba(15, 15, 15, 0.9);
-  --border: rgba(255, 255, 255, 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --bg-dark: #0c0c0c;
+  --btp-neon: #39FF14;
+  --btp-dark-nav: rgba(0, 0, 0, 0.95);
+  --btp-text-white: #ffffff;
+  --btp-text-gray: #a0aec0;
+  --btp-trans: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Global Navbar Container */
+/* --- Desktop Navbar Container --- */
 .nav-container {
   position: fixed;
   top: 0;
@@ -15,80 +15,64 @@
   width: 100%;
   height: 85px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 8%;
-  z-index: 1000;
-  transition: var(--transition);
+  align-items: center;
+  padding: 0 6%;
   background: transparent;
+  z-index: 2000;
+  transition: var(--btp-trans);
   box-sizing: border-box;
 }
 
+/* Scroll ചെയ്യുമ്പോൾ ബാക്ക്ഗ്രൗണ്ട് വരാൻ */
 .nav-active {
+  background: var(--btp-dark-nav);
   height: 75px;
-  background: var(--glass);
   backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(57, 255, 20, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Brand Styling */
+/* --- Brand/Logo --- */
 .nav-brand {
   font-family: 'Bebas Neue', sans-serif;
-  font-weight: 900;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   letter-spacing: 2px;
-  color: #fff;
+  color: var(--btp-text-white);
   cursor: pointer;
+  user-select: none;
 }
 
 .brand-accent {
-  color: var(--primary);
+  color: var(--btp-neon);
   text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
 }
 
-/* Desktop Navigation Links */
-.nav-links {
+/* --- Desktop Menu Links --- */
+.nav-links.desktop-only {
   display: flex;
   list-style: none;
   gap: 35px;
-  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #fff;
-  font-weight: 500;
+  color: var(--btp-text-gray);
   font-size: 0.9rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  transition: 0.3s;
-  position: relative;
-  opacity: 0.7;
-  padding: 8px 0;
+  letter-spacing: 1px;
+  transition: var(--btp-trans);
 }
 
-.nav-links a:hover, .active-link {
-  color: var(--primary) !important;
-  opacity: 1 !important;
-}
-.welcome-tex{
-  color: #39FF14;
+.nav-links a:hover, 
+.nav-links a.active-link {
+  color: var(--btp-neon);
 }
 
-.active-link::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--primary);
-  border-radius: 10px;
-  box-shadow: 0 0 12px var(--primary);
-}
-
-/* Actions (Cart & Wishlist) */
+/* --- Action Icons (Heart & Bag) --- */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -98,50 +82,103 @@
 .icon-wrapper {
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .nav-icon {
   font-size: 1.4rem;
-  color: #fff;
+  color: var(--btp-text-white);
+  transition: var(--btp-trans);
+}
+
+.icon-wrapper:hover .nav-icon {
+  color: var(--btp-neon);
+  transform: translateY(-2px);
 }
 
 .badge {
   position: absolute;
-  top: -10px;
-  right: -12px;
-  background: var(--primary);
+  top: -8px;
+  right: -10px;
+  background: var(--btp-neon);
   color: #000;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 900;
-  width: 18px;
+  min-width: 18px;
   height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
+  border: 2px solid #000;
+}
+
+/* --- User Section (Welcome Text Green) --- */
+.user-section.desktop-only {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 2px solid #000;
+}
+
+.user-logged-in {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(57, 255, 20, 0.1);
+}
+
+.welcome-text {
+  color: var(--btp-neon); /* Welcome text green color */
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--btp-trans);
+}
+
+.welcome-text:hover {
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+}
+
+.logout-icon {
+  color: #ff4d4d !important;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.login-bt {
+  background: var(--btp-neon);
+  color: #000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 /* --- MOBILE BOTTOM NAVIGATION --- */
 .mobile-bottom-nav {
-  display: none; 
+  display: none; /* Desktop-ൽ ഹൈഡ് ചെയ്യുന്നു */
 }
 
+/* --- Media Queries (Mobile & Tablet) --- */
 @media (max-width: 900px) {
-  .desktop-only, .nav-links, .user-section {
+  .desktop-only {
     display: none !important;
   }
 
-  /* Top bar background during scroll on mobile */
   .nav-container {
     height: 70px;
-    background: var(--bg-dark);
-    padding: 0 5%;
-    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    background: var(--btp-dark-nav); /* മൊബൈലിൽ എപ്പോഴും ബാക്ക്ഗ്രൗണ്ട് */
   }
 
   .nav-brand {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 
   .mobile-bottom-nav {
@@ -151,13 +188,12 @@
     left: 0;
     width: 100%;
     height: 65px;
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border);
+    background: #0f0f0f;
+    border-top: 1px solid #222;
     justify-content: space-around;
     align-items: center;
     z-index: 2000;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom); /* iPhone-ൽ താഴെ ഗ്യാപ്പ് വരാൻ */
   }
 
   .bottom-nav-item {
@@ -165,48 +201,22 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.5);
+    color: #718096;
     font-size: 0.65rem;
-    gap: 5px;
-    transition: var(--transition);
-    flex: 1; /* Equal spacing */
+    font-weight: 500;
+    gap: 4px;
+    transition: var(--btp-trans);
   }
 
   .bottom-nav-item svg {
-    font-size: 1.4rem; 
+    font-size: 1.3rem;
   }
 
-  /* Active state for Bottom Nav - Neon Effect */
   .bottom-nav-item.active {
-    color: var(--primary);
+    color: var(--btp-neon);
   }
 
   .bottom-nav-item.active svg {
-    filter: drop-shadow(0 0 8px var(--primary));
-  }
-}
-
-/* Buttons */
-.login-bt {
-  background: var(--primary);
-  color: #0c0c0c;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.logout-icon { color: #ff4d4d; cursor: pointer; }
-
-/* Desktop Icon Active Styling */
-.active-action .nav-icon {
-    color: var(--primary) !important;
-    filter: drop-shadow(0 0 8px var(--primary));
-}
-
-@media (max-width: 900px) {
-  body {
-    padding-bottom: 80px; 
+    transform: translateY(-3px);
   }
 }
