@@ -30,7 +30,7 @@ function Carts() {
             withCredentials: true 
         })
         .then((res) => {
-            setcart(res.data.results); 
+            setcart(res.data.results || []); 
             setHasNext(!!res.data.next);
             setHasPrev(!!res.data.previous);
         })
@@ -87,21 +87,21 @@ function Carts() {
                 {!userlog ? (
                     <div className='no-auth-box'>
                         <p>Please login to see your cart.</p>
-                        <button onClick={() => navigate('/login')}>Login Now</button>
+                        <button className='neon-btn' onClick={() => navigate('/login')}>Login Now</button>
                     </div>
                 ) : cart.length === 0 ? (
                     <div className='empty-cart-box'>
                         <p>Your bag is empty!</p>
-                        <button onClick={() => navigate('/Products')}>Shop Products</button>
+                        <button className='neon-btn' onClick={() => navigate('/Products')}>Shop Products</button>
                     </div>
                 ) : (
                     <div className='cart-layout-grid'>
-                        {/* List Area */}
+                        {/* LEFT: Product List Area */}
                         <div className='cart-items-column'>
                             {cart.map((item) => (
                                 <div key={item.id} className='cart-product-strip'>
                                     <div className='product-thumb'>
-                                        <img src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : ''} alt="" />
+                                        <img src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : ''} alt={item.product?.name} />
                                     </div>
                                     <div className='product-details'>
                                         <div className='row-between'>
@@ -120,7 +120,6 @@ function Carts() {
                                 </div>
                             ))}
                             
-                            {/* Pagination Controls */}
                             <div className='pagination-bar'>
                                 <button disabled={!hasPrev} onClick={() => setCurrentPage(currentPage - 1)}>Prev</button>
                                 <span>{currentPage}</span>
@@ -128,22 +127,21 @@ function Carts() {
                             </div>
                         </div>
 
-                        {/* Desktop Sidebar */}
+                        {/* RIGHT: Desktop Sidebar (Sticky) */}
                         <aside className='cart-sidebar-desktop'>
                             <div className='summary-inner-box'>
-                                <h3>Price Details</h3>
-                                <div className='sum-row'><span>Items Subtotal</span><span>₹{grandTotal.toFixed(2)}</span></div>
-                                <div className='sum-row'><span>Delivery Fee</span><span>₹{shipping.toFixed(2)}</span></div>
-                                <hr />
-                                <div className='sum-row grand-total'><span>Total Pay</span><span>₹{(grandTotal + shipping).toFixed(2)}</span></div>
-                                <button className='checkout-cta' onClick={() => navigate('/checkout')}>Checkout Now</button>
+                                <h3>Order Summary</h3>
+                                <div className='sum-row'><span>Subtotal</span><span>₹{grandTotal.toFixed(2)}</span></div>
+                                <div className='sum-row'><span>Shipping</span><span>₹{shipping.toFixed(2)}</span></div>
+                                <div className='sum-row grand-total'><span>Total</span><span>₹{(grandTotal + shipping).toFixed(2)}</span></div>
+                                <button className='checkout-cta' onClick={() => navigate('/checkout')}>Proceed to Checkout</button>
                             </div>
                         </aside>
 
-                        {/* MOBILE STICKY FOOTER */}
+                        {/* BOTTOM: Mobile Sticky Footer */}
                         <div className='mobile-checkout-sticky-bar'>
                             <div className='sticky-price-info'>
-                                <p>Payable Amount</p>
+                                <p>Total Amount</p>
                                 <h2>₹{(grandTotal + shipping).toFixed(2)}</h2>
                             </div>
                             <button className='sticky-continue-btn' onClick={() => navigate('/checkout')}>Continue</button>
