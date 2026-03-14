@@ -119,36 +119,20 @@
   border: 2px solid #000;
 }
 
-/* User Section (Desktop) */
-.user-section {
-  display: flex;
-  align-items: center;
-  border-left: 1px solid var(--border);
-  padding-left: 20px;
-}
-
-.welcome-text {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--primary);
-  text-transform: uppercase;
-}
-
-/* --- MOBILE BOTTOM NAVIGATION (MEESHO STYLE) --- */
+/* --- MOBILE BOTTOM NAVIGATION --- */
 .mobile-bottom-nav {
-  display: none; /* Desktop-ൽ കാണിക്കില്ല */
+  display: none; 
 }
 
 @media (max-width: 900px) {
-  /* Hide desktop elements */
-  .desktop-only, .nav-links, .user-section .welcome-text {
-    display: none;
+  .desktop-only, .nav-links, .user-section {
+    display: none !important;
   }
 
-  /* Top Bar adjustments */
+  /* Top bar background during scroll on mobile */
   .nav-container {
     height: 70px;
-    background: var(--bg-dark); /* Mobile Top bar background */
+    background: var(--bg-dark);
     padding: 0 5%;
     border-bottom: 1px solid var(--border);
   }
@@ -157,7 +141,6 @@
     font-size: 1.2rem;
   }
 
-  /* Show Bottom Nav on Mobile */
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
@@ -179,17 +162,18 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.65rem;
     gap: 5px;
     transition: var(--transition);
+    flex: 1; /* Equal spacing */
   }
 
   .bottom-nav-item svg {
-    font-size: 1.3rem;
+    font-size: 1.4rem; 
   }
 
-  /* Active state for Bottom Nav */
+  /* Active state for Bottom Nav - Neon Effect */
   .bottom-nav-item.active {
     color: var(--primary);
   }
@@ -199,8 +183,7 @@
   }
 }
 
-/* Logout & Login Button */
-.logout-icon { color: #ff4d4d; font-size: 1.5rem; cursor: pointer; }
+/* Buttons */
 .login-bt {
   background: var(--primary);
   color: #0c0c0c;
@@ -211,28 +194,16 @@
   cursor: pointer;
 }
 
-/* ഐക്കൺ ആക്ടീവ് ആകുമ്പോൾ പച്ച നിറം വരാൻ */
+.logout-icon { color: #ff4d4d; cursor: pointer; }
+
+/* Desktop Icon Active Styling */
 .active-action .nav-icon {
     color: var(--primary) !important;
-    opacity: 1 !important;
     filter: drop-shadow(0 0 8px var(--primary));
 }
 
-.active-action::after {
-    content: '';
-    position: absolute;
-    bottom: -15px; 
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--primary);
-    border-radius: 10px;
-    box-shadow: 0 0 12px var(--primary);
-    animation: underlineGrow 0.3s ease-out;
-}
-
 @media (max-width: 900px) {
-    .active-action::after {
-        display: none; 
-    }
+  body {
+    padding-bottom: 80px; 
+  }
 }

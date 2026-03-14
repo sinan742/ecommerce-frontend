@@ -141,7 +141,6 @@ export default function AdminProducts() {
             setIsModalOpen(false);
             fetchProducts();
         } catch (err) { 
-            // ബാക്കെൻഡിലെ 'Long URL' എറർ ഉണ്ടോ എന്ന് ഇവിടെ പരിശോധിക്കാം
             const errorMsg = err.response?.data?.image?.[0] || "Error saving data.";
             toast.error(errorMsg); 
         }

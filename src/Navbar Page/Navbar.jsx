@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import './Navbar.css';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { FaHeart, FaBagShopping, FaHouse, FaFutbol, FaCircleInfo, FaCircleUser } from "react-icons/fa6";
+import { FaHeart, FaBagShopping, FaHouse, FaFutbol, FaTruckFast, FaCircleUser } from "react-icons/fa6";
 import { BiLogOut } from "react-icons/bi"; 
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -74,13 +74,12 @@ function Navbar() {
 
   return (
     <>
-      {/* --- TOP NAVBAR --- */}
+      {/* --- TOP NAVBAR (Desktop) --- */}
       <nav className={`nav-container ${scrolled ? 'nav-active' : ''}`}>
         <div className='nav-brand' onClick={() => navigate('/')}>
           BEYOND <span className='brand-accent'>THE PITCH</span>
         </div>
 
-        {/* Desktop Links - Hidden on Mobile */}
         <ul className='nav-links desktop-only'>
           <li><NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>Home</NavLink></li>
           <li><NavLink to="/Products" className={({ isActive }) => isActive ? 'active-link' : ''}>Store</NavLink></li>
@@ -89,19 +88,16 @@ function Navbar() {
         </ul>
 
         <div className='nav-actions'>
-          {/* Wishlist */}
           <div className={`icon-wrapper ${location.pathname === '/wlist' ? 'active-action' : ''}`} onClick={() => navigate('/wlist')}>
             <FaHeart className='nav-icon' />
             {wishlistCount > 0 && <span className='badge'>{wishlistCount}</span>}
           </div>
 
-          {/* Cart */}
           <div className={`icon-wrapper ${location.pathname === '/carts' ? 'active-action' : ''}`} onClick={() => navigate('/carts')}>
             <FaBagShopping className='nav-icon' />
             {cartCount > 0 && <span className='badge'>{cartCount}</span>}
           </div>
 
-          {/* User Desktop - Hidden on Mobile Bottom bar will handle this */}
           <div className='user-section desktop-only'>
             {userlog ? (
               <div className='user-logged-in'>
@@ -125,11 +121,11 @@ function Navbar() {
         </NavLink>
         <NavLink to="/Products" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
           <FaFutbol />
-          <span>Footballs</span>
+          <span>Store</span>
         </NavLink>
-        <NavLink to="/about" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
-          <FaCircleInfo />
-          <span>About</span>
+        <NavLink to="/orders" className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
+          <FaTruckFast />
+          <span>Orders</span>
         </NavLink>
         <NavLink to={userlog ? "/profile" : "/login"} className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}>
           <FaCircleUser />
