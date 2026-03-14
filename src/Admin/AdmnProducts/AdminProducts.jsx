@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Plus, Edit, Trash2, Search, Link as LinkIcon } from 'lucide-react'; 
+import { Plus, Edit, Trash2, Search } from 'lucide-react'; 
 import AdNavbar from '../../adminNavbar/AdNavbar';
 import './AdminProducts.css';
 import { toast } from 'react-toastify';
 
 const ProductModal = ({ product, onClose, onSave }) => {
-    const [formData, setFormData] = useState(
-        product || { name: '', brand: '', price: '', stock: '', description: '', image: '' } 
-    );
+    // Edit ചെയ്യുമ്പോൾ പഴയ ഡാറ്റ വരാനും, പുതിയതാണെങ്കിൽ ശൂന്യമായിരിക്കാനും താഴെ പറയുന്ന രീതി മാറ്റുക
+    const [formData, setFormData] = useState({
+        id: product?.id || null,
+        name: product?.name || '',
+        brand: product?.brand || '',
+        price: product?.price || '',
+        stock: product?.stock || '',
+        description: product?.description || '',
+        image: product?.image || '' // ഇവിടെ URL സ്ട്രിംഗ് വരും
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -17,8 +24,9 @@ const ProductModal = ({ product, onClose, onSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // ഇമേജ് URL ശൂന്യമല്ലെന്ന് ഉറപ്പുവരുത്തുക
         if (!formData.name || !formData.brand || !formData.price || !formData.stock || !formData.image) {
-            toast.warning("Please fill all fields including Image URL.");
+            toast.warning("Please fill all fields, including the Image URL.");
             return;
         }
         onSave(formData);
@@ -55,24 +63,26 @@ const ProductModal = ({ product, onClose, onSave }) => {
                         <textarea className="ap-textarea" name="description" value={formData.description} onChange={handleChange}></textarea>
                     </div>
                     
-                    {/* 🛑 ഇവിടെ മാറ്റം വരുത്തി: File Input മാറ്റി Text Input ആക്കി */}
                     <div className="ap-form-group">
                         <label className="ap-label">Product Image URL</label>
-                        <div style={{ position: 'relative' }}>
-                            <input 
-                                className="ap-input" 
-                                type="text" 
-                                name="image" 
-                                value={formData.image} 
-                                onChange={handleChange} 
-                                placeholder="https://res.cloudinary.com/..." 
-                                required 
-                            />
-                        </div>
+                        <input 
+                            className="ap-input" 
+                            type="text" 
+                            name="image" 
+                            value={formData.image} 
+                            onChange={handleChange} 
+                            placeholder="Paste Cloudinary or Image URL here..." 
+                            required 
+                        />
                         {formData.image && (
-                            <div className="ap-image-preview-mini">
-                                <p style={{ fontSize: '10px', color: '#666' }}>Preview:</p>
-                                <img src={formData.image} alt="Preview" style={{ width: '50px', borderRadius: '4px' }} onError={(e) => e.target.src='https://placehold.co/50?text=Invalid+URL'} />
+                            <div className="ap-image-preview-mini" style={{ marginTop: '10px' }}>
+                                <p style={{ fontSize: '12px', color: '#666' }}>Image Preview:</p>
+                                <img 
+                                    src={formData.image} 
+                                    alt="Preview" 
+                                    style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #ddd' }} 
+                                    onError={(e) => e.target.src='https://placehold.co/60?text=Error'} 
+                                />
                             </div>
                         )}
                     </div>
@@ -108,7 +118,8 @@ export default function AdminProducts() {
     useEffect(() => { fetchProducts(); }, []);
 
     const handleSaveProduct = async (productData) => {
-        const data = {
+        // ഇമേജ് URL ആയതുകൊണ്ട് നമുക്ക് നേരിട്ട് JSON അയക്കാം
+        const payload = {
             name: productData.name,
             brand: productData.brand,
             price: productData.price,
@@ -119,21 +130,25 @@ export default function AdminProducts() {
 
         try {
             if (productData.id) {
-                await axios.put(`${API_URL}${productData.id}/`, data);
-                toast.success("Updated!");
+                // UPDATE
+                await axios.put(`${API_URL}${productData.id}/`, payload);
+                toast.success("Product Updated Successfully!");
             } else {
-                await axios.post(API_URL, data);
-                toast.success("Added!");
+                // CREATE
+                await axios.post(API_URL, payload);
+                toast.success("Product Added Successfully!");
             }
             setIsModalOpen(false);
             fetchProducts();
         } catch (err) { 
-            toast.error("Error saving data. Check if the URL is too long."); 
+            // ബാക്കെൻഡിലെ 'Long URL' എറർ ഉണ്ടോ എന്ന് ഇവിടെ പരിശോധിക്കാം
+            const errorMsg = err.response?.data?.image?.[0] || "Error saving data.";
+            toast.error(errorMsg); 
         }
     };
 
     const handleDeleteProduct = async (id) => {
-        if (window.confirm('Delete?')) {
+        if (window.confirm('Are you sure you want to delete this product?')) {
             try {
                 await axios.delete(`${API_URL}${id}/`);
                 fetchProducts();
@@ -149,7 +164,13 @@ export default function AdminProducts() {
     return (
         <div className="ap-page-container">
             <AdNavbar />
-            {isModalOpen && <ProductModal product={editingProduct} onClose={() => setIsModalOpen(false)} onSave={handleSaveProduct} />}
+            {isModalOpen && (
+                <ProductModal 
+                    product={editingProduct} 
+                    onClose={() => setIsModalOpen(false)} 
+                    onSave={handleSaveProduct} 
+                />
+            )}
             
             <div className="ap-main-content">
                 <header className="ap-header">
@@ -161,6 +182,7 @@ export default function AdminProducts() {
                                 type="text" 
                                 placeholder="Search products..." 
                                 className="ap-search-input" 
+                                value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)} 
                             />
                         </div>
@@ -186,7 +208,12 @@ export default function AdminProducts() {
                                 <tr key={p.id}>
                                     <td>
                                         <div className="ap-product-cell">
-                                            <img src={p.image || 'https://placehold.co/50'} className="ap-product-img" alt="" />
+                                            <img 
+                                                src={p.image || 'https://placehold.co/50'} 
+                                                className="ap-product-img" 
+                                                alt={p.name} 
+                                                onError={(e) => e.target.src='https://placehold.co/50?text=No+Img'}
+                                            />
                                             <span className="ap-product-name">{p.name}</span>
                                         </div>
                                     </td>
