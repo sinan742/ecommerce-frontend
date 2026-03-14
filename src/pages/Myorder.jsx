@@ -52,7 +52,7 @@ function Myorder() {
                             {order.items && order.items.map((item) => (
                                 <div key={item.id} className="fk-item-section">
                                     <div className="fk-img-container">
-                                        <img src={item.product_image || 'https://placehold.co/100'} alt={item.product_name} />
+                                        <img src={item.image || 'https://placehold.co/100'} alt={item.product_name} />
                                 
                                     </div>
                                     <div className="fk-details-container">
