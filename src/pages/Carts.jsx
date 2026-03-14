@@ -30,7 +30,7 @@ function Carts() {
             withCredentials: true 
         })
         .then((res) => {
-            setcart(res.data.results || []); 
+            setcart(res.data.results); 
             setHasNext(!!res.data.next);
             setHasPrev(!!res.data.previous);
         })
@@ -59,6 +59,7 @@ function Carts() {
         .then(() => {
             fetchCart(currentPage);
             fetchAllItemsForTotal();
+            window.dispatchEvent(new Event("cartUpdated"));
         })
         .catch(err => console.error("Update error:", err));
     };
@@ -70,6 +71,8 @@ function Carts() {
         })
         .then(() => {
             toast.success("Item removed");
+            window.dispatchEvent(new Event("cartUpdated"));
+            window.dispatchEvent(new Event("storage_updated"));
             fetchCart(currentPage);
             fetchAllItemsForTotal();
             if (cart.length === 1 && currentPage > 1) setCurrentPage(currentPage - 1);
@@ -80,71 +83,91 @@ function Carts() {
     const shipping = grandTotal > 0 ? 50.00 : 0;
 
     return (
-        <div className='btp-cart-master-container'>
-            <div className='btp-cart-wrapper'>
-                <h1 className='btp-cart-main-heading'>Your <span className='btp-neon-highlight'>Bag</span></h1>
+        <div className='bn-cart-page'>
+            <div className='bn-cart-container'>
+                <h1 className='bn-cart-title'>Your <span className='bn-text-neon'>Bag</span></h1>
                 
                 {!userlog ? (
-                    <div className='btp-empty-state-card'>
-                        <p>Join the pitch! Login to see your items.</p>
-                        <button className='btp-neon-action-btn' onClick={() => navigate('/login')}>Login Now</button>
+                    <div className='bn-auth-notice'>
+                        <h2>Your bag is waiting</h2>
+                        <button className='bn-login-btn' onClick={() => navigate('/login')}>Login Now</button>
                     </div>
                 ) : cart.length === 0 ? (
-                    <div className='btp-empty-state-card'>
-                        <p>Your bag is currently empty.</p>
-                        <button className='btp-neon-action-btn' onClick={() => navigate('/Products')}>Start Shopping</button>
+                    <div className='bn-empty-state'>
+                        <p>Your cart is empty.</p>
+                        <button className='bn-shop-btn' onClick={() => navigate('/Products')}>Continue Shopping</button>
                     </div>
                 ) : (
-                    <div className='btp-cart-grid-system'>
-                        {/* LEFT: Items List */}
-                        <div className='btp-cart-items-list-area'>
+                    <div className='bn-cart-grid'>
+                        {/* Left Side: Items List */}
+                        <div className='bn-cart-items-wrapper'>
                             {cart.map((item) => (
-                                <div key={item.id} className='btp-cart-item-card'>
-                                    <div className='btp-item-image-box'>
-                                        <img src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : ''} alt={item.product?.name} />
+                                <div key={item.id} className='bn-cart-card'>
+                                    <div className='bn-cart-card-img'>
+                                        <img 
+                                            src={item.product?.image ? (item.product.image.startsWith('http') ? item.product.image : `${BASE_URL}${item.product.image}`) : 'https://via.placeholder.com/150'} 
+                                            alt={item.product?.name} 
+                                            onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
+                                        />
                                     </div>
-                                    <div className='btp-item-info-box'>
-                                        <div className='btp-item-header-row'>
-                                            <h3 className='btp-product-name-txt'>{item.product?.name}</h3>
-                                            <button className='btp-item-delete-btn' onClick={() => removeCart(item.id)}>Remove</button>
+                                    <div className='bn-cart-card-info'>
+                                        <div className='bn-info-header'>
+                                            <h3>{item.product?.name}</h3>
+                                            <button className='bn-remove-btn' onClick={() => removeCart(item.id)}>Remove</button>
                                         </div>
-                                        <div className='btp-item-footer-row'>
-                                            <div className='btp-qty-selector-widget'>
+                                        <p className='bn-brand-text'>{item.product?.brand || 'Premium'}</p>
+                                        <div className='bn-info-footer'>
+                                            <div className='bn-qty-selector'>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
-                                                <span className='btp-qty-count'>{item.quantity}</span>
+                                                <span>{item.quantity}</span>
                                                 <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                                             </div>
-                                            <span className='btp-item-price-tag'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</span>
+                                            <div className='bn-item-price'>₹{(parseFloat(item.product?.price) * item.quantity).toFixed(2)}</div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
-                            
-                            <div className='btp-pagination-control-bar'>
-                                <button disabled={!hasPrev} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-                                <span className='btp-page-number'>{currentPage}</span>
-                                <button disabled={!hasNext} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+
+                            {/* Pagination Buttons */}
+                            <div className='bn-pagination'>
+                                <button className='bn-page-nav' disabled={!hasPrev} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
+                                <span className='bn-page-indicator'>Page {currentPage}</span>
+                                <button className='bn-page-nav' disabled={!hasNext} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
                             </div>
                         </div>
 
-                        {/* RIGHT: Desktop Summary */}
-                        <aside className='btp-desktop-summary-panel'>
-                            <div className='btp-summary-box-inner'>
-                                <h3 className='btp-summary-title'>Order Summary</h3>
-                                <div className='btp-summary-line'><span className='btp-label'>Subtotal</span><span className='btp-val'>₹{grandTotal.toFixed(2)}</span></div>
-                                <div className='btp-summary-line'><span className='btp-label'>Shipping Charge</span><span className='btp-val'>₹{shipping.toFixed(2)}</span></div>
-                                <div className='btp-summary-line btp-total-row'><span className='btp-label'>Grand Total</span><span className='btp-val'>₹{(grandTotal + shipping).toFixed(2)}</span></div>
-                                <button className='btp-checkout-primary-btn' onClick={() => navigate('/checkout')}>Secure Checkout</button>
+                        {/* Right Side Summary (Desktop Only) */}
+                        <aside className='bn-desktop-sidebar'>
+                            <div className='bn-summary-card'>
+                                <h3>Order Summary</h3>
+                                <div className='bn-summary-row'>
+                                    <span>Subtotal</span>
+                                    <span>₹{grandTotal.toFixed(2)}</span>
+                                </div>
+                                <div className='bn-summary-row'>
+                                    <span>Shipping</span>
+                                    <span>₹{shipping.toFixed(2)}</span>
+                                </div>
+                                <div className='bn-summary-divider'></div>
+                                <div className='bn-summary-row bn-total-line'>
+                                    <span>Total</span>
+                                    <span className='bn-text-neon'>₹{(grandTotal + shipping).toFixed(2)}</span>
+                                </div>
+                                <button className='bn-checkout-main-btn' onClick={() => navigate('/checkout')}>
+                                    Proceed to Checkout
+                                </button>
                             </div>
                         </aside>
 
-                        {/* MOBILE: Sticky Footer */}
-                        <div className='btp-mobile-sticky-footer'>
-                            <div className='btp-mobile-price-group'>
-                                <span className='btp-mobile-label'>Total Payable</span>
-                                <h2 className='btp-mobile-total-price'>₹{(grandTotal + shipping).toFixed(2)}</h2>
+                        {/* Mobile Sticky Footer Bar */}
+                        <div className='bn-mobile-sticky-footer'>
+                            <div className='bn-mobile-price-group'>
+                                <span className='bn-m-label'>Total Amount</span>
+                                <span className='bn-m-price'>₹{(grandTotal + shipping).toFixed(2)}</span>
                             </div>
-                            <button className='btp-mobile-cta-btn' onClick={() => navigate('/checkout')}>Checkout</button>
+                            <button className='bn-mobile-continue-btn' onClick={() => navigate('/checkout')}>
+                                Continue
+                            </button>
                         </div>
                     </div>
                 )}
