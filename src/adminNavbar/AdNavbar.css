@@ -1,157 +1,172 @@
-body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, sans-serif; /* Cleaner font for admin */
-    background-color: #ffffff; /* Entire page background to White */
-    color: #1a1a1a; /* Dark text for readability */
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1.5rem;
-    background-color: #ffffff; /* White Navbar */
-    color: #000000; /* Dark text */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle border look */
-    position: fixed; /* Sticky-ye kaal fixed aanu better */
-    top: 0;
-    width: 100%;
-    z-index: 999;
-    height: 70px; /* Increased height for better look */
-    box-sizing: border-box;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu-button {
-    background: #f1f5f9; /* Light grey button background */
-    border: none;
-    color: #000000;
-    cursor: pointer;
-    padding: 0.6rem;
-    display: flex;
-    border-radius: 8px;
-    transition: background 0.2s;
-  }
-  
-  .menu-button:hover {
-    background: #e2e8f0;
-  }
-
-  .navbar-brand {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 800;
-    font-size: 1.2rem;
-    letter-spacing: -0.5px;
-  }
-
-  .login-btn {
-    padding: 0.6rem 1.2rem;
-    background-color: #000000; /* Professional Black button */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .sidebar {
+/* NAVBAR BASE */
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 260px;
-    height: 100vh;
-    background-color: #0f172a; /* Keeping Sidebar dark for high contrast */
-    color: white;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 2rem 1.2rem;
-    box-sizing: border-box;
+    width: 100%;
+    height: 70px;
+    background-color: #1e293b; /* Slate Blue */
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #334155;
     z-index: 1000;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar-left h3 {
+    color: #f8fafc;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    color: #3b82f6; /* Electric Blue icon */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+}
+
+/* SIDEBAR STYLES */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Hidden by default */
+    width: 280px;
+    height: 100vh;
+    background-color: #0f172a; /* Deep Dark Blue */
+    color: #f8fafc;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
     display: flex;
     flex-direction: column;
-  }
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid #334155;
+}
 
-  .sidebar.open {
-    transform: translateX(0);
-  }
+.sidebar.open {
+    left: 0;
+}
 
-  .sidebar-header {
+.sidebar-header {
+    padding: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1rem;
-  }
+    border-bottom: 1px solid #1e293b;
+}
 
-  .close-button {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 5px;
-    display: flex;
-  }
-
-  .sidebar-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex-grow: 1;
-  }
-
-  .sidebar-links a {
-    display: block;
-    color: #94a3b8; /* Muted grey for links */
-    text-decoration: none;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-    transition: all 0.3s;
-    font-weight: 500;
-  }
-
-  .sidebar-links a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    padding-left: 1.5rem;
-  }
-
-  .sidebar-footer {
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .logout-btn {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: #ef4444; /* Brighter red */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+.sidebar-header h3 {
+    font-size: 1.2rem;
     font-weight: 700;
-  }
+    color: #94a3b8;
+}
 
-  .main-content {
+.close-button {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+/* SIDEBAR LINKS */
+.sidebar-links {
+    list-style: none;
+    padding: 1.5rem 0;
+    flex-grow: 1;
+}
+
+.sidebar-links li a {
+    display: block;
+    padding: 1rem 2rem;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-links li a:hover {
+    background-color: #1e293b;
+    color: #3b82f6;
+    border-left: 4px solid #3b82f6;
+    padding-left: 2.5rem;
+}
+
+/* SIDEBAR FOOTER & LOGOUT */
+.sidebar-footer {
     padding: 2rem;
-    margin-top: 70px; /* Correctly offsets the content due to fixed navbar */
-    text-align: center;
-    background-color: #ffffff;
-  }
+    border-top: 1px solid #1e293b;
+}
 
-  @media (max-width : 600px) {
+.logout-btn {
+    width: 100%;
+    background-color: #450a0a; /* Dark Red */
+    color: #f87171;
+    padding: 0.8rem;
+    border: 1px solid #991b1b;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #991b1b;
+    color: white;
+}
+
+/* MOBILE VIEW OVERLAY */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 1500;
+    display: none;
+}
+
+.sidebar.open ~ .sidebar-overlay {
+    display: block;
+}
+
+/* TABLET & LAPTOP OPTIMIZATIONS */
+@media (min-width: 1024px) {
     .navbar {
-        padding: 0.5rem 1rem;
+        padding: 0 4rem;
     }
-  }
+    
+    .sidebar {
+        width: 300px;
+    }
+}
+
+/* SMALL MOBILE VIEW */
+@media (max-width: 480px) {
+    .navbar-left h3 {
+        font-size: 1.1rem;
+    }
+    
+    .sidebar {
+        width: 100%; /* Full screen menu on very small phones */
+        left: -100%;
+    }
+}
