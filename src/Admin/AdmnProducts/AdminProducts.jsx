@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Plus, Edit, Trash2, Search } from 'lucide-react'; 
+import { Plus, Edit, Trash2, Search, X } from 'lucide-react'; 
 import AdNavbar from '../../adminNavbar/AdNavbar';
 import './AdminProducts.css';
 import { toast } from 'react-toastify';
 
 const ProductModal = ({ product, onClose, onSave }) => {
-    // Edit ചെയ്യുമ്പോൾ പഴയ ഡാറ്റ വരാനും, പുതിയതാണെങ്കിൽ ശൂന്യമായിരിക്കാനും താഴെ പറയുന്ന രീതി മാറ്റുക
     const [formData, setFormData] = useState({
         id: product?.id || null,
         name: product?.name || '',
@@ -14,7 +13,7 @@ const ProductModal = ({ product, onClose, onSave }) => {
         price: product?.price || '',
         stock: product?.stock || '',
         description: product?.description || '',
-        image: product?.image || '' // ഇവിടെ URL സ്ട്രിംഗ് വരും
+        image: product?.image || '' 
     });
 
     const handleChange = (e) => {
@@ -24,7 +23,6 @@ const ProductModal = ({ product, onClose, onSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // ഇമേജ് URL ശൂന്യമല്ലെന്ന് ഉറപ്പുവരുത്തുക
         if (!formData.name || !formData.brand || !formData.price || !formData.stock || !formData.image) {
             toast.warning("Please fill all fields, including the Image URL.");
             return;
@@ -37,7 +35,7 @@ const ProductModal = ({ product, onClose, onSave }) => {
             <div className="ap-modal-content">
                 <div className="ap-modal-header">
                     <h2 className="ap-modal-title">{product ? '✏️ Edit Product' : '➕ Add New Product'}</h2>
-                    <button className="ap-close-x" onClick={onClose}>&times;</button>
+                    <button className="ap-close-x" onClick={onClose}><X size={24} /></button>
                 </div>
                 <form onSubmit={handleSubmit} className="ap-modal-form">
                     <div className="ap-form-group">
@@ -71,16 +69,15 @@ const ProductModal = ({ product, onClose, onSave }) => {
                             name="image" 
                             value={formData.image} 
                             onChange={handleChange} 
-                            placeholder="Paste Cloudinary or Image URL here..." 
+                            placeholder="Paste image URL here..." 
                             required 
                         />
                         {formData.image && (
-                            <div className="ap-image-preview-mini" style={{ marginTop: '10px' }}>
-                                <p style={{ fontSize: '12px', color: '#666' }}>Image Preview:</p>
+                            <div className="ap-image-preview-mini">
+                                <p>Preview:</p>
                                 <img 
                                     src={formData.image} 
                                     alt="Preview" 
-                                    style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #ddd' }} 
                                     onError={(e) => e.target.src='https://placehold.co/60?text=Error'} 
                                 />
                             </div>
@@ -118,23 +115,12 @@ export default function AdminProducts() {
     useEffect(() => { fetchProducts(); }, []);
 
     const handleSaveProduct = async (productData) => {
-        // ഇമേജ് URL ആയതുകൊണ്ട് നമുക്ക് നേരിട്ട് JSON അയക്കാം
-        const payload = {
-            name: productData.name,
-            brand: productData.brand,
-            price: productData.price,
-            stock: productData.stock,
-            description: productData.description || "",
-            image: productData.image 
-        };
-
+        const payload = { ...productData };
         try {
             if (productData.id) {
-                // UPDATE
                 await axios.put(`${API_URL}${productData.id}/`, payload);
                 toast.success("Product Updated Successfully!");
             } else {
-                // CREATE
                 await axios.post(API_URL, payload);
                 toast.success("Product Added Successfully!");
             }
@@ -205,7 +191,7 @@ export default function AdminProducts() {
                         <tbody>
                             {filtered.map(p => (
                                 <tr key={p.id}>
-                                    <td>
+                                    <td data-label="Product">
                                         <div className="ap-product-cell">
                                             <img 
                                                 src={p.image || 'https://placehold.co/50'} 
@@ -216,14 +202,14 @@ export default function AdminProducts() {
                                             <span className="ap-product-name">{p.name}</span>
                                         </div>
                                     </td>
-                                    <td><span className="ap-brand-tag">{p.brand}</span></td>
-                                    <td className="ap-price-text">₹{p.price}</td>
-                                    <td>
+                                    <td data-label="Brand"><span className="ap-brand-tag">{p.brand}</span></td>
+                                    <td data-label="Price" className="ap-price-text">₹{p.price}</td>
+                                    <td data-label="Stock">
                                         <span className={`ap-stock-badge ${p.stock < 10 ? 'ap-low' : 'ap-ok'}`}>
                                             {p.stock} in stock
                                         </span>
                                     </td>
-                                    <td>
+                                    <td data-label="Actions" className="ap-text-right">
                                         <div className="ap-action-btns">
                                             <button onClick={() => { setEditingProduct(p); setIsModalOpen(true); }} className="ap-edit-icon" title="Edit"><Edit size={18} /></button>
                                             <button onClick={() => handleDeleteProduct(p.id)} className="ap-delete-icon" title="Delete"><Trash2 size={18} /></button>
