@@ -1,71 +1,71 @@
-/* Container & Background */
+/* GLOBAL WRAPPER */
 .ao-page-wrapper {
-    background-color: #0f172a; 
+    background-color: #f4f7f9;
     min-height: 100vh;
-    padding-top: 80px;
+    font-family: 'Inter', sans-serif;
 }
 
 .ao-container {
-    max-width: 1200px;
+    padding: 20px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem;
 }
 
-/* Header Section */
+/* HEADER SECTION */
 .ao-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 24px;
+    gap: 15px;
 }
 
 .ao-page-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #f8fafc;
+    font-size: 1.5rem;
+    color: #1a202c;
+    margin: 0;
 }
 
 .ao-subtitle {
-    color: #94a3b8;
-    font-size: 0.95rem;
+    color: #718096;
+    margin: 4px 0 0;
 }
 
-/* Search Bar (Dark Styled) */
 .ao-search-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
+    width: 100%;
+    max-width: 350px;
 }
 
 .ao-search-icon {
     position: absolute;
     left: 12px;
-    color: #64748b;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
 }
 
 .ao-search-input {
-    padding: 0.7rem 1rem 0.7rem 2.5rem;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    width: 320px;
-    background: #1e293b;
-    color: white;
-    outline: none;
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
     transition: all 0.2s;
 }
 
 .ao-search-input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
 }
 
-/* Table Design (Dark Theme) */
+/* TABLE CARD */
 .ao-table-card {
-    background: #1e293b;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border: 1px solid #334155;
 }
 
 .ao-table {
@@ -74,217 +74,179 @@
 }
 
 .ao-table th {
-    background: #334155;
-    padding: 1.2rem 1rem;
+    background-color: #f8fafc;
+    padding: 16px;
     text-align: left;
-    font-size: 0.8rem;
-    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4a5568;
     text-transform: uppercase;
-    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #edf2f7;
 }
 
 .ao-table td {
-    padding: 1.2rem 1rem;
-    border-bottom: 1px solid #334155;
-    color: #f8fafc;
+    padding: 16px;
+    border-bottom: 1px solid #edf2f7;
     vertical-align: middle;
 }
 
 .ao-id-tag {
-    font-weight: 700;
-    color: #60a5fa;
+    background: #ebf8ff;
+    color: #2b6cb0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
 }
 
 .ao-price-cell {
-    font-weight: 700;
-    color: #f8fafc;
+    font-weight: 600;
+    color: #2d3748;
 }
 
-/* Status Select Styles */
+/* STATUS STYLES */
 .ao-status-select {
-    padding: 0.5rem 0.8rem;
+    padding: 6px 10px;
     border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid transparent;
     cursor: pointer;
-    outline: none;
-    transition: 0.2s;
 }
 
-.ao-status-pending { background: #451a03; color: #fbbf24; }
-.ao-status-order-placed { background: #172554; color: #60a5fa; }
-.ao-status-packed { background: #4a044e; color: #f0abfc; }
-.ao-status-shipped { background: #0c4a6e; color: #7dd3fc; }
-.ao-status-delivered { background: #064e3b; color: #34d399; }
-.ao-status-cancelled { background: #450a0a; color: #f87171; }
+.ao-status-order-placed { background: #e2e8f0; color: #4a5568; }
+.ao-status-packed { background: #feebc8; color: #9c4221; }
+.ao-status-shipped { background: #bee3f8; color: #2c5282; }
+.ao-status-delivered { background: #c6f6d5; color: #22543d; }
+.ao-status-cancelled { background: #fed7d7; color: #822727; }
 
-/* Action Buttons */
+/* ACTIONS */
 .ao-actions {
     display: flex;
-    gap: 0.6rem;
-    justify-content: flex-end;
+    gap: 8px;
 }
 
 .ao-btn-view, .ao-btn-delete {
-    padding: 0.6rem;
-    border-radius: 10px;
-    border: 1px solid #334155;
-    background: #1e293b;
-    color: #94a3b8;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.2s;
 }
 
-.ao-btn-view:hover { background: #334155; color: #60a5fa; border-color: #60a5fa; }
-.ao-btn-delete:hover { background: #450a0a; color: #f87171; border-color: #f87171; }
+.ao-btn-view { background: #edf2f7; color: #4a5568; }
+.ao-btn-view:hover { background: #e2e8f0; }
+.ao-btn-delete { background: #fff5f5; color: #e53e3e; }
+.ao-btn-delete:hover { background: #fed7d7; }
 
-/* --- THE PREMIUM MODAL UI --- */
+/* MODAL STYLES */
 .ao-modal-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(10px);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 2000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 15px;
 }
 
 .ao-modal-content {
-    background: #1e293b;
-    width: 95%; 
-    max-width: 650px;
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
     max-height: 90vh;
-    border-radius: 24px;
-    display: flex; flex-direction: column;
-    border: 1px solid #334155;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .ao-modal-header {
-    padding: 1.5rem 2rem;
-    background: #334155;
-    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
 }
 
-.ao-close-x {
-    background: none; border: none; font-size: 2rem; cursor: pointer; color: #cbd5e1;
-    line-height: 1;
-}
-
-.ao-modal-body {
-    padding: 1.5rem 2rem;
-    overflow-y: auto;
-    color: #f8fafc;
-}
+.ao-modal-body { padding: 20px; }
 
 .ao-address-card {
-    background: #0f172a;
-    padding: 1.2rem;
-    border-radius: 12px;
-    border: 1px solid #334155;
-    margin-top: 0.8rem;
-    margin-bottom: 1.5rem;
-}
-
-.ao-address-text {
-    color: #94a3b8;
-    line-height: 1.6;
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 
 .ao-item-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid #334155;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f1f1;
 }
 
-.ao-item-img {
-    width: 60px; height: 60px;
-    object-fit: cover; border-radius: 10px;
-    border: 1px solid #334155;
-}
+.ao-item-main { display: flex; gap: 12px; align-items: center; }
+.ao-item-img { width: 50px; height: 50px; border-radius: 6px; object-fit: cover; }
+.ao-item-details { display: flex; flex-direction: column; }
+.ao-item-name { font-weight: 500; font-size: 0.9rem; }
+.ao-item-meta { font-size: 0.8rem; color: #718096; }
 
-.ao-item-name {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-/* --- THE IMPROVED PRICE SECTION (Footer) --- */
-.ao-summary-footer {
-    padding: 25px 30px;
-    background: #162031; 
-    border-top: 1px solid #334155;
-}
-
-.ao-total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.ao-total-label {
-    color: #94a3b8;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.ao-grand-total {
-    font-size: 2rem; 
-    font-weight: 800;
-    color: #3b82f6; 
-    letter-spacing: -1px;
-}
-
-.ao-badge-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.ao-pay-badge {
-    padding: 0.6rem 1.2rem;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.ao-paid { 
-    background: rgba(52, 211, 153, 0.1); 
-    color: #34d399; 
-    border: 1px solid rgba(52, 211, 153, 0.2);
-}
-
-.ao-unpaid { 
-    background: rgba(248, 113, 113, 0.1); 
-    color: #f87171; 
-    border: 1px solid rgba(248, 113, 113, 0.2);
-}
-
-.ao-btn-close {
-    padding: 10px 25px;
-    background: #334155;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: all 0.2s;
-}
-
-.ao-btn-close:hover {
-    background: #475569;
-    transform: translateY(-2px);
-}
-
+/* MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
-    .ao-hide-mobile { display: none; }
-    .ao-search-input { width: 100%; }
-    .ao-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
-    .ao-grand-total { font-size: 1.5rem; }
+    .ao-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ao-search-wrapper { max-width: 100%; }
+
+    /* Transform Table to Cards */
+    .ao-table thead { display: none; } /* Hide headers */
+
+    .ao-table, .ao-table tbody, .ao-table tr, .ao-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .ao-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #edf2f7;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .ao-table td {
+        text-align: right;
+        padding: 12px 15px;
+        position: relative;
+        border-bottom: 1px solid #f7fafc;
+    }
+
+    .ao-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: 600;
+        color: #718096;
+        font-size: 0.85rem;
+    }
+
+    .ao-hide-mobile { display: none !important; }
+
+    .ao-actions { justify-content: flex-end; }
+
+    .ao-text-right { text-align: right; }
+}
+
+.ao-loading {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
