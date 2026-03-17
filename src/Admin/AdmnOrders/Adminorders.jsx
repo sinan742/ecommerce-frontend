@@ -41,7 +41,7 @@ const OrderDetailsModal = ({ order, onClose }) => {
                         {order.items?.map(item => (
                             <div key={item.id} className="ao-item-row">
                                 <img 
-                                    src={item.imgUrl || 'https://placehold.co/50'} 
+                                    src={item.image || 'https://placehold.co/50'} 
                                     alt={item.product_name} 
                                     className="ao-item-thumb" 
                                 />
